@@ -1,5 +1,7 @@
 # FileTypeOrganization (WIN64, WIN32, LinuxOS, & others - cross-platform safe)
 
+difficult to do this or anything when your being affected by hate crimes daily from your landlords friends. makes it impossible to think and use the internet.  not something anyone will understand but ill be judged by others how i am when they are hurting me beyond any words that exist in the human language. 
+
     >>>deleteprogam branch now moved into its own repo, no need to download from the branch anymore, branch will soon be deleted from this repo, and work will only continue from the DeleteFilesOfExtensionType repo:
 
     https://github.com/Sean-Jesky/DeleteFilesOfExtensionType.git
