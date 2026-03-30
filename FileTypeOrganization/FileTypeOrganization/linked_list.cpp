@@ -243,15 +243,18 @@ void linked_list::copy_relevent_files(const element_t dest, const bool copy_cond
 			copy_conditions cc;
 			if (copy_condition == cc.keep_copies) 
 			{
-				if (fs::exists(fname_loc)) 
-				{
-					fs::rename(fname_loc.string(), fname_.string() + "( Copy #" + std::to_string(i) + ')' + current->file_extension_type.string());
-				}
+			    if (fs::exists(fname_loc)) 
+		     {
+
+//TODO: fix to change for every new filenames, the counter resets to: 1, 2, 3, ..., n. 
+			        fs::rename(fname_loc.string(), fname_.string() + "( Copy #" + std::to_string(i) + ')' + current->file_extension_type.string());
+				    }
 				i += 1;
+
 #if _WIN64
-				if (CopyFileEx(fitr, fname__, NULL, NULL, FALSE, COPY_FILE_NO_BUFFERING | COPY_FILE_FAIL_IF_EXISTS)) 
-					total_ext += 1;
-				else {}
+				    if (CopyFileEx(fitr, fname__, NULL, NULL, FALSE, COPY_FILE_NO_BUFFERING | COPY_FILE_FAIL_IF_EXISTS)) 
+					   total_ext += 1;
+				    else {}
 
 #elif _WIN32
 				CopyFileEx(fitr, fname__, NULL, NULL, FALSE, COPY_FILE_NO_BUFFERING | COPY_FILE_FAIL_IF_EXISTS);
@@ -263,9 +266,9 @@ void linked_list::copy_relevent_files(const element_t dest, const bool copy_cond
 			}
 			else if (copy_condition == cc.keep_no_copies)
 			{
-				if (fs::exists(file_iter)) {
-					if (file_iter.extension() == current->file_extension_type)
-					{
+			if (fs::exists(file_iter)) {
+			    if (file_iter.extension() == current->file_extension_type)
+					  {
 #if _WIN64
 						if (CopyFileEx(fitr, fname__, NULL, NULL, FALSE, COPY_FILE_NO_BUFFERING | COPY_FILE_FAIL_IF_EXISTS))
 							total_ext += 1;
@@ -281,11 +284,11 @@ void linked_list::copy_relevent_files(const element_t dest, const bool copy_cond
 			//TODO:
 				//APPLE STUFFS
 #endif
-					}
 				}
-				else;
-			}
-		}
+				    }
+				    else;
+			 }
+}
 		auto t2_end = std::chrono::high_resolution_clock::now();
 		auto time_to_copy = std::chrono::duration_cast<std::chrono::milliseconds> (t2_end - t1_start).count();
 		
@@ -296,6 +299,7 @@ void linked_list::copy_relevent_files(const element_t dest, const bool copy_cond
 		i = 1;		 //count of duplicates //idk yet.
 	}
 }
+
 
 //for_testing_only, if this is active, and if the program reads corn from a file, it will terminate the program.
 /*
@@ -308,57 +312,3 @@ int kill_switch(element_t kill_condition) {
 	return 0;
 }
 */
-
-
-
-
-
-
-
-
-
-//--------------------------------------------------------
-/*
-		for(node* curr = head; curr; curr = curr->pNext_linked_list){
-			element_t prev_fext = "";
-			int count  = 0;
-			//if(curr->file_extension_type != prev_fext)
-			//{
-
-				//bored..my psudorandom number generator:
-				std::unique_ptr<unsigned int> x(new unsigned int);
-				//x = (int *)&x;
-
-				uintptr_t addy = reinterpret_cast<uintptr_t>(x.get());
-				static int  hash = addy;
-			//std::reinterpret_pointer_cast()
-				hash += hash % 11 + (1 - addy); //make a p-random memory address the rng_seed
-				curr->hash_value ^=  ~hash | hash & 1;
-				curr->hash_value |= hash;
-
-				//..
-				auto TMP = hash;
-
-				//...
-				hash ^= hash << 3;
-				hash ^= (hash * 13) << TMP;
-				hash ^= curr->hash_value;
-
-				//..
-				curr->hash_value ^= hash;
-				hash += curr->hash_value;
-				//...
-				curr->hv2 = std::to_string(curr->hash_value);
-				curr->hv1 = std::to_string(hash);
-
-				std::cout << stoi(curr->hv1) << ",\n";
-			}
-
-			//}
-				prev_fext = curr->file_extension_type;
-
-				count = 0;
-		
-		just moving it down here, makes it hard to read the beauty i wrote above.
-		
-		*/
