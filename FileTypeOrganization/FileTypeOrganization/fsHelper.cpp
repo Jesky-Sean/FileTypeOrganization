@@ -69,6 +69,7 @@ const std::vector<element_t> collect_relivant_files(const element_t& directory) 
 void create_directory_from_extension_type(const element_t base_save_location, const element_t curr_extension)
 {
 	fs::create_directory((base_save_location.string()) + curr_extension.string().erase(0, 1));
+//TODO: if showwindow is set to false, then run without erase, functionality. 
 	//std::cout << "\n";
        	//std::cout << "[!] We are currently working on: " << curr_extension.string() << " type files from data collected: ";
 }
